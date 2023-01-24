@@ -1,0 +1,151 @@
+<%- include('partials/header.ejs') %>
+
+    <main>
+        <h1>agregar datos MYSQL</h1>
+        <div class="container-sm cont-ingreso">
+            <form id="uploader" class="container-sm" action="/agregarMysql" method="post">
+                <label for="POST-name">Usuario:</label>
+                <input nombre="datos" type="text" name="usuario">
+
+                <label for="POST-name">Correo:</label>
+                <input nombre="datos" type="email" name="correo">
+
+                <label for="POST-name">contrasena</label>
+                <input nombre="datos" type="password" name="contrasena">
+
+                <label for="POST-name">Nacimiento</label>
+                <input nombre="datos" type="date" name="nacimiento">
+
+                <label for="POST-sexo">Sexo</label>
+                <select name="sexo">
+
+                    <option value="M">Masculino</option>
+
+                    <option value="F">Femenino</option>
+
+                </select>
+
+                <input type="submit" value="Guardar">
+            </form>
+        </div>
+        <h1>
+            <%=titulo%>
+        </h1>
+
+        <div class="container">
+            <h2>Filtrar datos</h2>
+            <form action="/filtroMysql" method="post">
+                <label for="Nombre">Nacimiento</label>
+                <input type="date" name="nacimiento" id="">
+                <select name="opcionDate">
+                    <option value="igual">Igual</option>
+                    <option value="mayor">mayor o igual</option>
+                    <option value="menor">menor o igual</option>
+                </select>
+                <label for="sexo">sexo</label>
+                <select name="sexo">
+                    <option value="indefinido">Indefinido</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
+                </select>
+
+                <button class="editar" value=""> Filtrar</button>
+            </form>
+            <br>
+        </div>
+
+        <div id="tablar" class="contenido-tabla container-sm refres-div">
+            <table id="tabla" class="table table-warning">
+                <thead>
+                    <tr>
+                        <th scope="col " class="table-danger centrar-texto">Id</th>
+                        <th scope="col " class="table-danger centrar-texto">Usuario</th>
+                        <th scope="col " class="table-danger centrar-texto">Correo</th>
+                        <th scope="col " class="table-danger centrar-texto">contrasena</th>
+                        <th scope="col " class="table-danger centrar-texto">Nacimiento</th>
+                        <th scope="col " class="table-danger centrar-texto">sexo</th>
+                        <th scope="col " class="table-danger centrar-texto">Accion</th>
+                    </tr>
+                </thead>
+                <% for(var i=0; i < datos.length; i++) { %>
+                    <tbody>
+                        <tr>
+                            <td id="pruebah">
+                                <%= datos[i].id %>
+                            </td>
+                            <td>
+                                <%= datos[i].usuario %>
+                            </td>
+                            <td>
+                                <%= datos[i].correo %>
+                            </td>
+                            <td>
+                                <%= datos[i].contrasena %>
+                            </td>
+                            <td>
+                                <%= datos[i].nacimiento.getFullYear()+"-"+(datos[i].nacimiento.getMonth()+1)+"-"+
+                                    datos[i].nacimiento.getDate() %>
+                            </td>
+                            <td>
+                                <%= datos[i].sexo %>
+                            </td>
+                            <td class="container-sm d-flex">
+                                <form action="/mysqlElimina" method="post">
+                                    <button name="id" type="submit" value="<%= datos[i].id %>">Elimina</button>
+                                </form>
+                                <button class="editar" value="<%= datos[i].id %>"> Editar</button>
+
+                            </td>
+                        </tr>
+
+                        <tr class="Cont-editable" id="<%= datos[i].id%>" style="display: none;">
+                            <form action="/mysqlActu" method="post">
+                                <td>
+                                    <input placeholder=" <%= datos[i].id %>" type="text" readonly name="id"
+                                        value="<%= datos[i].id %>">
+                                </td>
+
+                                <td>
+                                    <input placeholder=" <%= datos[i].usuario %>" type="text" name="usuario"
+                                        value="<%=datos[i].usuario%>">
+                                </td>
+
+                                <td>
+                                    <input placeholder=" <%= datos[i].correo %>" type="text" name="correo"
+                                        value="<%=datos[i].correo%>">
+                                </td>
+                                <td>
+                                    <input placeholder=" <%= datos[i].contrasena %>" type="text" name="contrasena"
+                                        value="<%=datos[i].contrasena%>">
+                                </td>
+                                <td>
+                                    <input placeholder=" <%= datos[i].nacimiento %>" type="text"  name="nacimiento"
+                                        value="<%= datos[i].nacimiento.getFullYear()+"-"+(datos[i].nacimiento.getMonth()+1)+"-"+
+                                        datos[i].nacimiento.getDate() %>">
+                                </td>
+                                <td>
+                                    <select name="sexo">
+                                        <option value="<%=datos[i].sexo%>"><%=datos[i].sexo%></option>
+                                        <option value="M">Masculino</option>
+                                        <option value="F">Femenino</option>
+                                    </select>
+                                </td>
+                                <td><input type="submit" value="Save"></td>
+                            </form>
+                        </tr>
+
+                    </tbody>
+
+
+                    <% } %>
+
+            </table>
+
+        </div>
+    </main>
+    <footer></footer>
+    <%- include('partials/footer.ejs') %>
+
+    </body>
+
+    </html>

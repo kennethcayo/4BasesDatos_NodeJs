@@ -1,0 +1,76 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: rgb(255, 255, 255);
+}
+.centrar-texto{
+    text-align: center;
+
+}
+.cont-agrupar{
+    flex-direction: row;
+}
+h1 {
+    color: brown;
+    background-color: rgb(112, 227, 114);
+    text-align: center;
+    text-transform: uppercase;
+}
+
+form{
+    background-color: rgb(255, 255, 255);
+}
+
+table {
+
+    width: calc(100% - 200px);
+    border: solid;
+
+}
+th,
+td {
+    background-color: rgb(183, 220, 155);
+    width: 25%;
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid rgb(255, 255, 255);
+    text-align: center;
+}
+
+.cont-ingreso{
+    padding-bottom: 8px;
+}
+
+.contenido-tabla {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.c-actualizar{
+    background-color: yellow;
+}
+.buton-stilo{
+    display: flex;
+    background-color: brown;
+   
+}
+button{
+    text-transform: uppercase;
+}
+button:hover{
+    background-color: chartreuse;
+    cursor: pointer;
+}
+
+.Cont-editable input{
+    background-color: rgb(255, 255, 255);
+}
+.Cont-editable td{
+    background-color: rgb(255, 255, 255);
+}
+.editar{
+    margin-left: 1px;
+}

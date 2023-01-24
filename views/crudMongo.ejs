@@ -1,0 +1,160 @@
+<%- include('partials/header.ejs') %>
+
+    <main>
+        <h1>Agregar datos mongodb</h1>
+        <div class="container-sm cont-ingreso">
+            <form id="uploader" class="container-sm" action="/con" method="post">
+                <label for="POST-name">Usuario:</label>
+                <input nombre="datosMongo" type="text" name="usuario">
+
+                <label for="POST-name">Correo:</label>
+                <input nombre="datosMongo" type="email" name="correo">
+
+                <label for="POST-name">contrasena</label>
+                <input nombre="datosMongo" type="password" name="contrasena">
+
+                <label for="POST-name">Nacimiento</label>
+                <input nombre="datosMongo" type="date" name="nacimiento">
+
+                <label for="POST-sexo">Sexo</label>
+                <select name="sexo">
+
+                    <option value="M">Masculino</option>
+
+                    <option value="F">Femenino</option>
+
+                </select>
+
+                <input type="submit" value="Guardar">
+            </form>
+        </div>
+        <h1>
+            <%=titulo%>
+        </h1>
+        <div class="container">
+            <h2>Filtrar datosMongo</h2>
+            <form action="/filtroMongo" method="post">
+                <label for="Nombre">Nacimiento</label>
+                <input type="date" name="nacimiento" id="">
+                <select name="opcionDate">
+                    <option value="igual">Igual</option>
+                    <option value="mayor">mayor o igual</option>
+                    <option value="menor">menor o igual</option>
+                </select>
+                <label for="sexo">sexo</label>
+                <select name="sexo">
+                    <option value="indefinido">Indefinido</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
+                </select>
+
+                <button class="editar" value=""> Filtrar</button>
+            </form>
+            <br>
+        </div>
+        <div id="tablar" class="contenido-tabla container-sm refres-div">
+            <table id="tabla" class="table table-warning">
+                <thead>
+                    <tr>
+                        <th scope="col " class="table-danger centrar-texto">Id</th>
+                        <th scope="col " class="table-danger centrar-texto">Usuario</th>
+                        <th scope="col " class="table-danger centrar-texto">Correo</th>
+                        <th scope="col " class="table-danger centrar-texto">contrasena</th>
+                        <th scope="col " class="table-danger centrar-texto">Nacimiento</th>
+                        <th scope="col " class="table-danger centrar-texto">sexo</th>
+                        <th scope="col " class="table-danger centrar-texto">Accion</th>
+                    </tr>
+                </thead>
+                <% for(var i=0; i < datosMongo.length; i++) { %>
+                    <tbody>
+                        <tr>
+                            <td id="pruebah">
+                                <%= datosMongo[i].id %>
+                            </td>
+                            <td>
+                                <%= datosMongo[i].usuario %>
+                            </td>
+                            <td>
+                                <%= datosMongo[i].correo %>
+                            </td>
+                            <td>
+                                <%= datosMongo[i].contrasena %>
+                            </td>
+                            <td>
+                                <%= datosMongo[i].nacimiento.getFullYear()+"-"+(datosMongo[i].nacimiento.getMonth()+1)+"-"+
+                                    (datosMongo[i].nacimiento.getDate()+1) %>
+                            </td>
+                            <td>
+                                <%= datosMongo[i].sexo %>
+                            </td>
+                            <td class="container-sm d-flex">
+                                <form action="/conelimina" method="post">
+                                    <button name="id" type="submit" value="<%= datosMongo[i].id %>">Elimina</button>
+                                </form>
+                                <button class="editar" value="<%= datosMongo[i].id %>"> Editar</button>
+
+                            </td>
+                        </tr>
+
+                        <tr class="Cont-editable" id="<%= datosMongo[i].id%>" style="display: none;">
+                            <form action="/actu" method="post">
+                                <td>
+                                    <input placeholder=" <%= datosMongo[i].id %>" type="text" readonly name="id"
+                                        value="<%= datosMongo[i].id %>">
+                                </td>
+
+                                <td>
+                                    <input placeholder=" <%= datosMongo[i].usuario %>" type="text" name="usuario"
+                                        value="<%=datosMongo[i].usuario%>">
+                                </td>
+
+                                <td>
+                                    <input placeholder=" <%= datosMongo[i].correo %>" type="text" name="correo"
+                                        value="<%=datosMongo[i].correo%>">
+                                </td>
+                                <td>
+                                    <input placeholder=" <%= datosMongo[i].contrasena %>" type="text" name="contrasena"
+                                        value="<%=datosMongo[i].contrasena%>">
+                                </td>
+                                <td>
+                                    <% var anio, mes, dia; %>
+                                    <%anio =datosMongo[i].nacimiento.getFullYear(); %>
+                                    <%mes =datosMongo[i].nacimiento.getMonth(); %> 
+                                    <%mes =mes+1; %> 
+                                    <%if(mes <=9){mes="0"+mes}%> 
+
+                                    <%dia =datosMongo[i].nacimiento.getDate(); %> 
+                                    <%dia =dia+1; %> 
+                                    <%if(dia <=9){dia="0"+dia}%> 
+
+                                    <input nombre="datos" type="text" name="nacimiento" value="<%=anio+"-"+mes+"-"+dia%>" >
+
+                                </td>
+
+                                <td>
+
+                                        <select name="sexo">
+                                            <option value="<%=datosMongo[i].sexo%>"><%=datosMongo[i].sexo%></option>
+                                            <option value="M">Masculino</option>
+                                            <option value="F">Femenino</option>
+                                        </select>
+                                </td>
+                                <td><input type="submit" value="Save"></td>
+                            </form>
+                        </tr>
+
+                    </tbody>
+
+
+                    <% } %>
+
+            </table>
+
+        </div>
+    </main>
+    <footer></footer>
+    <%- include('partials/footer.ejs') %>
+
+</body>
+
+</html>

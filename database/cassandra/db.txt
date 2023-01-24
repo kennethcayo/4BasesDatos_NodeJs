@@ -1,0 +1,8 @@
+CREATE TABLE users (
+  id text ,
+  usuario text,
+  correo text,
+  contrasenia text,
+  nacimiento timestamp PRIMARY KEY,
+  sexo text,
+);

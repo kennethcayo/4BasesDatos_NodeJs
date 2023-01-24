@@ -1,0 +1,8 @@
+CREATE TABLE users (
+  PRIMARY KEY auto_incremet id int ,
+  usuario VARCHAR,
+  correo VARCHAR,
+  contrasena VARCHAR,
+  nacimiento timestamp ,
+  sexo VARCHAR,
+);
